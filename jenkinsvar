@@ -1,0 +1,14 @@
+pipeline {
+ agent any
+ options {disableConcurrentBuild () }
+ environments {
+   URL1 = 'google.com"
+ stages {
+   stage('firttask') {
+      step {
+        sh 'echo ${URL1}'
+        }
+      }
+    }  
+  } 
+}  
