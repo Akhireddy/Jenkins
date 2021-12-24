@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     URL1 = "google.com"
-    SSH = credentials("akhigcp")
+    SSH = credentials("WORKSTATION_ID")
   }
   stages {
     stage('ONE') {
