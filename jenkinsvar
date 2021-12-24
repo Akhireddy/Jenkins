@@ -1,14 +1,14 @@
 pipeline {
- agent any
- options {disableConcurrentBuild () }
- environment {
-   URL1 = "google.com"
- stages {
-   stage('firttask') {
-      steps {
-        sh 'echo ${URL1}'
-        }
-      }
-    }  
-  } 
-}  
+  agent any
+  options { disableConcurrentBuilds() }
+  environment {
+     URL1 = "google.com"
+  }
+  stages {
+     stage('first task') {
+     steps {
+       sh 'echo ${URL1}'
+       }
+    }
+ }   
+} 
