@@ -8,7 +8,7 @@ pipeline {
       }   
        stage('create pod') {
          steps {
-           sh 'kubect run --name httpd --image=httpd'
+           sh 'kubectl run --name httpd --image=httpd'
            }
        }   
      }   
