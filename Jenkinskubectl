@@ -1,0 +1,20 @@
+pipeline {
+  agent { label 'WORKSTATION' }
+  stages {
+    stage('check nodes') {
+       steps {
+         sh 'kubectl get nodes'
+         }
+      }
+      stage('check pods') {
+        steps {
+           sh 'kubectl get pods'
+           }
+        }
+      stage('create pod') {
+        steps {
+           sh 'kubectl run httpd --image=httpd'
+           }
+        }
+     }   
+ }

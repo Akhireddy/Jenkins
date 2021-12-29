@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-#Pipeline {
-# agent WORKSTATION
-#
-# stages {
-#   stage('Ansbile Playbook Run') {
-#     steps {
-#       sh 'ansible-playbook  -i inv -u akhigcp -m ansible.builtin.ping '
-#      }
-#   }
-# }
-#
-=======
 pipelineJob('roboshop-ansible') {
   configure { flowdefinition ->
     flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
@@ -31,4 +18,3 @@ pipelineJob('roboshop-ansible') {
     }
   }
 }
->>>>>>> origin/main

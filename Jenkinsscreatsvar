@@ -1,0 +1,16 @@
+pipeline {
+  agent any
+  environment {
+    URL1 = "google.com"
+    SSH = credentials("WORKSTATION_ID")
+  }
+  stages {
+    stage('ONE') {
+      steps {
+        sh 'echo ${URL1}'
+        sh 'env'
+        echo SSH
+      }
+    }
+  }
+}
