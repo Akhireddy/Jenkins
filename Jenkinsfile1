@@ -1,11 +1,11 @@
- pipeline {
-   agent WORKSTATION
-
-   stages {
-     stage('Ansbile Playbook Run') {
-       steps {
-         sh 'ansible-playbook -i inv -u akhigcp -m ansible.builtin.ping '
-        }
-     }
-   }
- }
+#Pipeline {
+# agent WORKSTATION
+#
+# stages {
+#   stage('Ansbile Playbook Run') {
+#     steps {
+#       sh 'ansible-playbook  -i inv -u akhigcp -m ansible.builtin.ping '
+#      }
+#   }
+# }
+#
