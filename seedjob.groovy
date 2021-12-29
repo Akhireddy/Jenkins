@@ -19,6 +19,53 @@
 //   }
 //
 
+//ipelineJob('roboshop-ansible') {
+// configure { flowdefinition ->
+//   flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+//     'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+//       'userRemoteConfigs' {
+//         'hudson.plugins.git.UserRemoteConfig' {
+//           'url'('https://github.com/Akhireddy/Ansible_Roboshop.git')
+//         }
+//       }
+//       'branches' {
+//         'hudson.plugins.git.BranchSpec' {
+//           'name'('*/main')
+//         }
+//       }
+//     }
+//     'scriptPath'('Jenkinsfile')
+//     'lightweight'(true)
+//   }
+// }
+//
+//
+//older('CI-Pipelines') {
+//   displayName('CI-Pipelines')
+//   description('CI-Pipelines')
+//
+//
+//ipelineJob('CI-Pipelines/cart') {
+// configure { flowdefinition ->
+//   flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+//     'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+//       'userRemoteConfigs' {
+//         'hudson.plugins.git.UserRemoteConfig' {
+//           'url'('https://github.com/Akhireddy/Cart.git')
+//         }
+//       }
+//       'branches' {
+//         'hudson.plugins.git.BranchSpec' {
+//           'name'('*/main')
+//         }
+//       }
+//     }
+//     'scriptPath'('Jenkinsfile')
+//     'lightweight'(true)
+//   }
+// }
+//
+
 pipelineJob('roboshop-ansible') {
   configure { flowdefinition ->
     flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
@@ -41,27 +88,34 @@ pipelineJob('roboshop-ansible') {
 }
 
 folder('CI-Pipelines') {
-    displayName('CI-Pipelines')
-    description('CI-Pipelines')
+  displayName('CI-Pipelines')
+  description('CI-Pipelines')
 }
 
-pipelineJob('CI-Pipelines/cart') {
-  configure { flowdefinition ->
-    flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
-      'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
-        'userRemoteConfigs' {
-          'hudson.plugins.git.UserRemoteConfig' {
-            'url'('https://github.com/Akhireddy/Cart.git')
+def COMPONENTS = ["cart", "catalogue", "payment", "shipping", "user", "dispatch"]
+
+def SIZE =  COMPONENTS.size -1
+
+for(i in 0..SIZE) {
+  def j = COMPONENTS[i]
+  pipelineJob("CI-Pipelines/${j}") {
+    configure { flowdefinition ->
+      flowdefinition << delegate.'definition'(class: 'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition', plugin: 'workflow-cps') {
+        'scm'(class: 'hudson.plugins.git.GitSCM', plugin: 'git') {
+          'userRemoteConfigs' {
+            'hudson.plugins.git.UserRemoteConfig' {
+              'url'("https://github.com/Akhireddy/${j}.git")
+            }
+          }
+          'branches' {
+            'hudson.plugins.git.BranchSpec' {
+              'name'('*/main')
+            }
           }
         }
-        'branches' {
-          'hudson.plugins.git.BranchSpec' {
-            'name'('*/main')
-          }
-        }
+        'scriptPath'('Jenkinsfile')
+        'lightweight'(true)
       }
-      'scriptPath'('Jenkinsfile')
-      'lightweight'(true)
     }
   }
 }
