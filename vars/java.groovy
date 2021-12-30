@@ -7,11 +7,11 @@ def call() {
     triggers {
       pollSCM('*/2 * * * *')
     }
-    
     stages {
-	     stage('Compile the Code') {
-        steps {
-         sh 'mvn compile'
+	
+     stage('Compile the Code') {
+       steps {
+        sh 'mvn compile'
       }
     }
       stage('Check the Code Quality') {
@@ -32,4 +32,5 @@ def call() {
           sh 'echo Test Cases'
         }
       }
+
     }
