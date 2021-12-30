@@ -1,7 +1,43 @@
-def info(message) {
-    echo "INFO: ${message}"
-}
+def call() {
+  pipeline {
+    agent {
+      label "${BUILD_LABEL}"
+    }
 
-def warning(message) {
-    echo "WARNING: ${message}"
+    triggers {
+      pollSCM('*/2 * * * *')
+    }
+
+    stages {
+
+
+      stage('Check the Code Quality') {
+        steps {
+          script {
+            common.sonarQube()
+          }
+        }
+      }
+
+      stage('Lint Checks') {
+        steps {
+          sh 'echo Lint Cases'
+        }
+      }
+
+      stage('Test Cases') {
+        steps {
+          sh 'echo Test Cases'
+        }
+      }
+
+    }
+
+    post {
+      always {
+        cleanWs()
+      }
+    }
+
+  }
 }
