@@ -32,5 +32,11 @@ def call() {
           sh 'echo Test Cases'
         }
     }
- }
+     post {
+      always {
+        cleanWs()
+      }
+    }
+  }
+}
 }
