@@ -7,20 +7,22 @@ def call() {
     triggers {
       pollSCM('*/2 * * * *')
     }
+
     stages {
-	
-     stage('Compile the Code') {
-       steps {
-        sh 'mvn compile'
-      }
-    }
-      stage('Check the Code Quality') {
+
+      stage('Compile the Code') {
         steps {
-          script {
-	    common.sonarQube()
+          sh 'mvn compile'
         }
       }
-    }
+
+      stage('Check the Code Quality') {
+        steps {
+          script 
+	   common.sonarQube
+        }
+      }
+
       stage('Lint Checks') {
         steps {
           sh 'echo Test Cases'
@@ -31,12 +33,15 @@ def call() {
         steps {
           sh 'echo Test Cases'
         }
+      }
+
     }
-     post {
+
+    post {
       always {
         cleanWs()
       }
     }
+
   }
-}
 }
