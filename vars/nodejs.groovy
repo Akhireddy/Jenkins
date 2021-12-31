@@ -5,7 +5,7 @@ def call() {
     }
 
     triggers {
-      pollSCM('H/5 * * * *')
+      pollSCM('H/2 * * * *')
     }
 
     stages {
