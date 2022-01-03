@@ -36,7 +36,6 @@ def call() {
           sh 'echo Test Cases'
         }
       }
-
     }
 
     post {
@@ -44,6 +43,4 @@ def call() {
         cleanWs()
       }
     }
-
   }
-}
