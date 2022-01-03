@@ -7,6 +7,15 @@ def call() {
     triggers {
       pollSCM('H/2 * * * *')
     }
+    
+    stage('Label Builds') {
+        steps {
+          script {
+            def gitTag = GIT_BRANCH.split('/').last()
+            addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
+          }
+        }
+    }
 
     stages {
       stage('Check the Code Quality') {
