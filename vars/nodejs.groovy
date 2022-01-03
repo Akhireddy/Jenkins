@@ -24,7 +24,6 @@ def call() {
         steps {
           script {
             common.sonarQube()
-			addBadge icon: '',id: '',link: '', text: 'DEMO'
           }
         }
       }
@@ -41,5 +40,26 @@ def call() {
           sh 'env'
         }
       }
+
+      stage('Publish Artifacts') {
+        when {
+          expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+        }
+        steps {
+          script {
+            //common.publishArtifacts()
+            println 'Publish Artifacts'
+          }
+        }
+      }
+
     }
+
+    post {
+      always {
+        cleanWs()
+      }
+    }
+
   }
+}
