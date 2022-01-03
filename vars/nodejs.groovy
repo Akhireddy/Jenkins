@@ -9,12 +9,11 @@ def call() {
     }
 
     stages {
-
-
       stage('Check the Code Quality') {
         steps {
           script {
             common.sonarQube()
+            addBadge icon: '',id: '',: '', text: 'DEMO'
           }
         }
       }
