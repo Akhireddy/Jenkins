@@ -8,7 +8,7 @@ def call() {
       pollSCM('H/2 * * * *')
     }
     
-    stage('Label Builds') {
+    stages ('Label Builds') {
         steps {
           script {
             def gitTag = GIT_BRANCH.split('/').last()
@@ -16,8 +16,6 @@ def call() {
           }
         }
     }
-
-    stages {
       stage('Check the Code Quality') {
         steps {
           script {
