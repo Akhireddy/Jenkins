@@ -7,20 +7,24 @@ def call() {
     triggers {
       pollSCM('H/2 * * * *')
     }
-    
-    stages ('Label Builds') {
+
+    stages {
+
+      stage('Label Builds') {
         steps {
           script {
             def gitTag = GIT_BRANCH.split('/').last()
             addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
           }
         }
-    }
+      }
+
+
       stage('Check the Code Quality') {
         steps {
           script {
             common.sonarQube()
-            addBadge icon: '', id: '',link: '', text: 'DEMO'
+			addBadge icon: '',id: '',: '', text: 'DEMO'
           }
         }
       }
@@ -34,13 +38,6 @@ def call() {
       stage('Test Cases') {
         steps {
           sh 'echo Test Cases'
+          sh 'env'
         }
       }
-    }
-
-    post {
-      cleanup {
-        cleanWs()
-      }
-    }
-  }
