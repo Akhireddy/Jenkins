@@ -3,8 +3,8 @@
 //}
 
 def sonarQube() {
-//  sh 'sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.15.251:9000 -Dsonar.login=admin -Dsonar.password=admin123'
-//  sh 'sonar-quality-gate.sh admin admin123 172.31.15.251 ${COMPONENT}'
+//  sh 'sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://34.125.104.3:9000 -Dsonar.login=admin -Dsonar.password=admin123'
+//  sh 'sonar-quality-gate.sh admin admin123 34.125.104.3 ${COMPONENT}'
   println 'SonarQube Testing'
 }
 
@@ -15,7 +15,7 @@ def publishArtifacts() {
 //    Utils.markStageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-    curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${gitTag}.zip http://nexus.roboshop.internal:8081/repository/${COMPONENT}/${COMPONENT}-${gitTag}.zip
+    curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${gitTag}.zip http://34.125.133.79:8081/repository/${COMPONENT}/${COMPONENT}-${gitTag}.zip
   '''
 }
 
