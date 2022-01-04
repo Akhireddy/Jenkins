@@ -15,8 +15,8 @@ def publishArtifacts() {
 //    Utils.markStageSkippedForConditional('Publish Artifacts')
 //  }
   sh '''
-    curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${gitTag}.zip http://34.125.193.119:8081/repository/${COMPONENT}/${COMPONENT}-${gitTag}.zip
-  '''
+    curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${gitTag}.zip http://34.125.133.79:8081/repository/${COMPONENT}/${COMPONENT}-${gitTag}.zip
+      '''
 }
 
 def prepareArtifacts() {
