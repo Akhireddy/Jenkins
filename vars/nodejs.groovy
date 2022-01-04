@@ -4,8 +4,14 @@ def call() {
       label "${BUILD_LABEL}"
     }
 
-    triggers {
-      pollSCM('H/2 * * * *')
+//    triggers {
+//      pollSCM('H/2 * * * *')
+//    }
+
+    environment {
+      PROG_LANG_NAME = "nodejs"
+      PROG_LANG_VERSION = "6"
+      NEXUS = credentials('NEXUS')
     }
 
     stages {
@@ -13,7 +19,7 @@ def call() {
       stage('Label Builds') {
         steps {
           script {
-            def gitTag = GIT_BRANCH.split('/').last()
+            env.gitTag = GIT_BRANCH.split('/').last()
             addShortText background: 'white', borderColor: 'white', color: 'red', link: '', text: "${gitTag}"
           }
         }
@@ -47,8 +53,8 @@ def call() {
         }
         steps {
           script {
-            //common.publishArtifacts()
-            println 'Publish Artifacts'
+            common.prepareArtifacts()
+            common.publishArtifacts()
           }
         }
       }
