@@ -9,7 +9,7 @@ def call() {
  //   }
     environment {
       PROG_LANG_NAME = "python"
-      PROG_LANG_VERSION = "3"
+      PROG_LANG_VERSION = "2"
       NEXUS = credentials('NEXUS')
     }
 
