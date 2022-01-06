@@ -4,9 +4,9 @@ def call() {
       label "${BUILD_LABEL}"
     }
 
- //   triggers {
-    //   pollSCM('2 * * * *')
-   // }
+//    triggers {
+//      pollSCM('H/2 * * * *')
+//    }
 
     environment {
       PROG_LANG_NAME = "java"
@@ -25,6 +25,12 @@ def call() {
         }
       }
 
+      stage('Compile the Code') {
+        steps {
+          sh 'mvn compile'
+        }
+      }
+
       stage('Check the Code Quality') {
         steps {
           script {
@@ -35,7 +41,7 @@ def call() {
 
       stage('Lint Checks') {
         steps {
-          sh 'echo Lint Cases'
+          sh 'echo Test Cases'
         }
       }
 
@@ -60,7 +66,7 @@ def call() {
     }
 
     post {
-      cleanup {
+      always {
         cleanWs()
       }
     }

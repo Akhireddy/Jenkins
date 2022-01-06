@@ -32,6 +32,7 @@ def prepareArtifacts() {
     sh '''
       mvn clean package 
       mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+      zip -r ${COMPONENT}-${gitTag}.zip ${COMPONENT}.jar
     '''
   }
 
