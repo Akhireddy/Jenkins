@@ -4,7 +4,11 @@ def call() {
             label "${BUILD_LABEL}"
         }
 
- //       environment {}
+        //environment {}
+
+        options {
+            ansiColor('xterm')
+        }
 
         parameters {
             choice(name: 'ENVIRONMENT', choices: ['', 'dev', 'prod'], description: 'Pick Environment')
@@ -25,9 +29,9 @@ def call() {
             stage('Apply Terraform Action') {
                 steps {
                     sh '''
-            terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
-            terraform ${ACTION} -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
-          '''
+                     terraform init -backend-config=env/${ENVIRONMENT}-backend.tfvars
+                     terraform ${ACTION} -auto-approve -var-file=env/${ENVIRONMENT}.tfvars
+                    '''
                 }
             }
 
