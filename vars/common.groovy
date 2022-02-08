@@ -3,8 +3,8 @@
 //}
 
 def sonarQube() {
-//  sh 'sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://34.125.104.3:9000 -Dsonar.login=admin -Dsonar.password=admin123'
-//  sh 'sonar-quality-gate.sh admin admin123 34.125.104.3 ${COMPONENT}'
+  sh 'sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://34.125.228.218:9000 -Dsonar.login=admin -Dsonar.password=admin'
+  sh 'sonar-quality-gate.sh admin admin 34.125.228.218 ${COMPONENT}'
   println 'SonarQube Testing'
 }
 
