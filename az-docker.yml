@@ -28,9 +28,5 @@ stages:
         steps:
           - script: |
               aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 267292875480.dkr.ecr.us-east-1.amazonaws.com
-              docker tag ${COMPONENT}:latest 267292875480.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:latest
-              docker push 267292875480.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:latest
-              
-              aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 267292875480.dkr.ecr.us-east-1.amazonaws.com
-              docker tag user:latest 267292875480.dkr.ecr.us-east-1.amazonaws.com/user:latest
-              docker push 267292875480.dkr.ecr.us-east-1.amazonaws.com/user:latest
+              docker tag ${COMPONENT}:latest 267292875480.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
+              docker push 267292875480.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
