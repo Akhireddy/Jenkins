@@ -29,6 +29,6 @@ stages:
           - script: |
               docker login -u akhirr -p Zaqwsx21  
               docker image list 
-              docker tag frontend akhirr/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
+              docker tag ${COMPONENT} akhirr/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
               docker image list
               docker push akhirr/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
