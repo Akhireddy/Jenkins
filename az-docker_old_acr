@@ -19,7 +19,7 @@ stages:
         steps:
           - script: |
               docker build -t  ${COMPONENT} .
-              
+
 
   - stage: DockerPush
     condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
@@ -27,8 +27,6 @@ stages:
       - job: DockerPush
         steps:
           - script: |
-              docker login -u akhirr -p Zaqwsx21  
-              docker image list 
-              docker tag frontend akhirr/frontend:${BUILD_SOURCEBRANCHNAME}
-              docker image list
-              docker push akhirr/frontend:${BUILD_SOURCEBRANCHNAME}
+              aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 267292875480.dkr.ecr.us-east-1.amazonaws.com
+              docker tag ${COMPONENT}:latest 267292875480.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
+              docker push 267292875480.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:${BUILD_SOURCEBRANCHNAME}
